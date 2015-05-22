@@ -1,8 +1,8 @@
 # Paths
-JDK_DIR=/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0
+JDK_DIR=/System/Library/Frameworks/JavaVM.framework
 LUA_LIB_DIR=/usr/lib
 LUA_INC_DIR=/usr/include/lua
-VERSION=5.1
+VERSION=52
 
 # Tools
 CC=gcc
@@ -16,10 +16,10 @@ LDFLAGS=-dynamiclib -m64
 all: libjnlua$(VERSION).jnilib
 
 libjnlua$(VERSION).jnilib: jnlua.o
-	$(LD) $(LDFLAGS) -o libjnlua$(VERSION).jnilib -L$(LUA_LIB_DIR) -lc -llua$(VERSION) jnlua.o
+	$(LD) $(LDFLAGS) -o ../../resources/libjnlua$(VERSION).jnilib -L$(LUA_LIB_DIR) -lc -llua.5.2 jnlua.o
 
 jnlua.o: ../jnlua.c
 	$(CC) $(CFLAGS) -I$(JDK_DIR)/Headers -I$(LUA_INC_DIR) ../jnlua.c
 
 clean:
-	-rm libjnlua$(VERSION).jnilib jnlua.o
+	-rm ../../resources/libjnlua$(VERSION).jnilib jnlua.o

@@ -18,17 +18,17 @@ LDFLAGS=-shared
 all: libjnlua$(VERSION).so javavm.so
 
 libjnlua$(VERSION).so: jnlua.o
-	$(LD) $(LDFLAGS) -Wl,-soname=libjnlua$(VERSION).so -olibjnlua$(VERSION).so -L$(LUA_LIB_DIR) jnlua.o -lc -llua$(LUA_VERSION)
+	$(LD) $(LDFLAGS) -Wl,-soname=../../resources/libjnlua$(VERSION).so -o../../resources/libjnlua$(VERSION).so -L$(LUA_LIB_DIR) jnlua.o -lc -llua$(LUA_VERSION)
 
 jnlua.o: ../jnlua.c
 	$(CC) $(CFLAGS) -I$(JDK_DIR)/include -I$(JDK_DIR)/include/linux -I$(LUA_INC_DIR) ../jnlua.c
 
 javavm.so: javavm.o
-	$(LD) $(LDFLAGS) -Wl,-soname=javavm.so -ojavavm.so -L$(LUA_LIB_DIR) -L$(JDK_DIR)/jre/lib/$(ARCH)/server javavm.o -llua$(LUA_VERSION) -ljvm
+	$(LD) $(LDFLAGS) -Wl,-soname=../../resources/javavm.so -o../../resources/javavm.so -L$(LUA_LIB_DIR) -L$(JDK_DIR)/jre/lib/$(ARCH)/server javavm.o -llua$(LUA_VERSION) -ljvm
 
 javavm.o: ../javavm.c ../javavm.h
 	$(CC) $(CFLAGS) -I$(JDK_DIR)/include -I$(JDK_DIR)/include/linux -I$(LUA_INC_DIR) ../javavm.c
 
 clean:
-	-rm libjnlua$(VERSION).so jnlua.o
-	-rm javavm.so javavm.o
+	-rm ../../resources/libjnlua$(VERSION).so jnlua.o
+	-rm ../../resources/javavm.so javavm.o
